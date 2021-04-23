@@ -81,7 +81,11 @@ export function RouteContainer({
             {key}
             <Input
               value={settings[key]}
-              onChange={({ target }) => handleChange(key, target.value)}
+              onChange={({
+                currentTarget
+              }: React.FormEvent<HTMLInputElement>) =>
+                handleChange(key, currentTarget.value)
+              }
             />
           </RowWrapper>
         ))}
