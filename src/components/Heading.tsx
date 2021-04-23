@@ -4,6 +4,20 @@ import styled, { css } from "styled-components";
 // Interfaces
 import { HeaderProps, HeaderTransientProps } from "interfaces/types";
 
+const Forwarded = styled.h1<HeaderTransientProps>`
+  ${({ $color, $fontSize, $fontWeight, $height }: HeaderTransientProps) =>
+    css`
+      color: ${$color};
+      font-size: ${$fontSize};
+      font-weight: ${$fontWeight};
+      height: ${$height};
+    `}
+`;
+
+const Element = ({ forwardedAs, ...rest }) => (
+  <Forwarded as={forwardedAs} {...rest} />
+);
+
 const Content: React.FC<HeaderProps> = ({
   type = "h1",
   content = "",
@@ -15,18 +29,9 @@ const Content: React.FC<HeaderProps> = ({
   const _type =
     ["h1", "h2", "h3", "h4", "h5", "h6"].find(h => h === type) || "h1";
 
-  const Element = styled[`${_type}`]<HeaderTransientProps>`
-    ${({ $color, $fontSize, $fontWeight, $height }: HeaderTransientProps) =>
-      css`
-        color: ${$color};
-        font-size: ${$fontSize};
-        font-weight: ${$fontWeight};
-        height: ${$height};
-      `}
-  `;
-
   return (
     <Element
+      forwardedAs={_type}
       $fontSize={fontSize}
       $fontWeight={fontWeight}
       $color={color}
