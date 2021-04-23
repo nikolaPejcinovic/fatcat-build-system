@@ -14,7 +14,7 @@ const Forwarded = styled.h1<HeaderTransientProps>`
     `}
 `;
 
-const Element = ({ forwardedAs, ...rest }) => (
+const Element = ({ forwardedAs, ...rest }): JSX.Element => (
   <Forwarded as={forwardedAs} {...rest} />
 );
 
